@@ -241,6 +241,22 @@ function App() {
     }
   };
 
+  const { user, loading, authScreen, setAuthScreen, logout } = useAuth();
+
+  // Se ainda carregando autenticação, não renderiza nada
+  if (loading) return null;
+
+  // Se não autenticado, mostra tela de login/register
+  if (!user) {
+    return (
+      <div className="app-layout">
+        <main className="app-shell">
+          <AuthScreen />
+        </main>
+      </div>
+    );
+  }
+
   return (
     <div className="app-layout">
       {/* Sidebar */}
@@ -314,6 +330,16 @@ function App() {
             </svg>
           </button>
           <div className="brand">ChatLLM Lab</div>
+          <div className="header-right">
+            <span className="header-email">{user.email}</span>
+            <button className="header-logout-btn" onClick={logout} title="Sair">
+              <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+                <path d="M6 2H3a1 1 0 0 0-1 1v10a1 1 0 0 0 1 1h3" />
+                <polyline points="10,12 14,8 10,4" />
+                <line x1="14" y1="8" x2="6" y2="8" />
+              </svg>
+            </button>
+          </div>
         </header>
 
         <section className="messages" aria-live="polite" ref={messagesRef}>
@@ -341,6 +367,14 @@ function App() {
   );
 }
 
+function Root() {
+  return (
+    <AuthProvider>
+      <App />
+    </AuthProvider>
+  );
+}
+
 const root = ReactDOM.createRoot(document.getElementById("root"));
-root.render(<App />);
+root.render(<Root />);
 

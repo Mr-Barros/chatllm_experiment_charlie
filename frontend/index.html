@@ -234,18 +234,38 @@
         align-items: center;
       }
 
-      .app-header {
-        flex-shrink: 0;
-        padding: 12px 24px;
-        border-bottom: 1px solid var(--border);
-        text-align: center;
+      .header-right {
+        display: flex;
+        align-items: center;
+        gap: 8px;
       }
 
-      .brand {
-        font-weight: 600;
-        font-size: 0.95rem;
-        color: var(--text);
-        letter-spacing: 0;
+      .header-email {
+        font-size: 0.85rem;
+        color: var(--muted);
+        max-width: 160px;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+      }
+
+      .header-logout-btn {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 32px;
+        height: 32px;
+        border: none;
+        background: transparent;
+        color: var(--muted);
+        cursor: pointer;
+        border-radius: 8px;
+        transition: background 120ms ease, color 120ms ease;
+      }
+
+      .header-logout-btn:hover {
+        background: var(--user-bubble);
+        color: #c0392b;
       }
 
       .messages {
@@ -425,6 +445,108 @@
         cursor: not-allowed;
       }
 
+      /* --- Auth Screen --- */
+      .auth-overlay {
+        position: fixed;
+        inset: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: var(--bg-page);
+        z-index: 200;
+      }
+
+      .auth-card {
+        width: 100%;
+        max-width: 380px;
+        padding: 40px 32px;
+        text-align: center;
+      }
+
+      .auth-brand {
+        font-weight: 700;
+        font-size: 1.3rem;
+        color: var(--text);
+        margin-bottom: 24px;
+      }
+
+      .auth-card h2 {
+        font-size: 1.2rem;
+        font-weight: 600;
+        margin: 0 0 20px;
+        color: var(--text);
+      }
+
+      .auth-error {
+        background: #fff5f5;
+        color: #c0392b;
+        padding: 10px 14px;
+        border-radius: 10px;
+        font-size: 0.85rem;
+        margin-bottom: 16px;
+        border: 1px solid #fed7d7;
+      }
+
+      .auth-card form {
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+      }
+
+      .auth-card input[type="email"],
+      .auth-card input[type="password"] {
+        width: 100%;
+        padding: 12px 16px;
+        border: 1px solid var(--composer-border);
+        border-radius: 12px;
+        font: inherit;
+        font-size: 1rem;
+        color: var(--text);
+        background: var(--bg-page);
+        outline: none;
+        transition: border-color 150ms ease;
+        box-sizing: border-box;
+      }
+
+      .auth-card input:focus {
+        border-color: #b0b0b0;
+      }
+
+      .auth-card button {
+        width: 100%;
+        padding: 12px;
+        border: none;
+        border-radius: 12px;
+        background: var(--accent);
+        color: #fff;
+        font: inherit;
+        font-size: 1rem;
+        font-weight: 600;
+        cursor: pointer;
+        transition: background 120ms ease;
+      }
+
+      .auth-card button:hover:not(:disabled) {
+        background: var(--accent-hover);
+      }
+
+      .auth-card button:disabled {
+        background: #d9d9d9;
+        cursor: not-allowed;
+      }
+
+      .auth-switch {
+        margin-top: 20px;
+        font-size: 0.9rem;
+        color: var(--muted);
+      }
+
+      .auth-switch a {
+        color: var(--accent);
+        text-decoration: underline;
+        cursor: pointer;
+      }
+
       @keyframes slideUp {
         from { opacity: 0; transform: translateY(6px); }
         to   { opacity: 1; transform: translateY(0); }
@@ -484,6 +606,7 @@
     <script type="text/babel" src="/frontend/src/api.js"></script>
     <script type="text/babel" src="/frontend/src/MessageContent.jsx"></script>
     <script type="text/babel" src="/frontend/src/Composer.jsx"></script>
+    <script type="text/babel" src="/frontend/src/AuthContext.jsx"></script>
     <script type="text/babel" src="/frontend/src/App.jsx"></script>
   </body>
 </html>
